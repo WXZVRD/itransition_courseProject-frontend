@@ -11,7 +11,7 @@ interface IAuthProps {
 const AuthButton: FC<IAuthProps> = ({socialIcon, socialTitle }) => {
 
     return(
-            <Link to={`https://itransition-courseproject-backend.onrender.com/${socialTitle}`}>
+            <Link to={`https://itransition-courseproject-backend.onrender.com/auth/${socialTitle}`}>
                 <Button
                     component="button"
                     size={"small"}
