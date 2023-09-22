@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {IAuthor} from "../../types/user/User";
 import CommentsServices from "../../services/commentsServices";
+import {STATUS} from "../../types/common";
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async (reviewId: string) => {
     try {
@@ -34,11 +35,7 @@ interface IComment {
     updatedAt: string,
     user: IAuthor,
 }
-enum STATUS {
-    LOADING = 'loading',
-    LOADED = 'loaded',
-    ERROR = 'error'
-}
+
 interface IinitState {
     comments: IComment[],
     status: STATUS

@@ -3,7 +3,7 @@ import axios from "axios";
 import { getTokenFromCookie } from "./utils/coockieUtils";
 
 const instance = axios.create({
-    baseURL: 'https://itransition-courseproject-backend.onrender.com',
+    baseURL: 'http://localhost:3301',
 })
 
 instance.interceptors.request.use((config) => {

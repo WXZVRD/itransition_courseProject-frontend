@@ -20,7 +20,13 @@ export enum ACTION {
 
 export interface IComposition{
     author?: string,
-    cover: string,
-    id: string,
+    cover?: string,
+    id?: string,
     title: string
+}
+
+export enum STATUS {
+    LOADING = 'loading',
+    LOADED = 'loaded',
+    ERROR = 'error'
 }

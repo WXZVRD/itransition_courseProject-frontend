@@ -42,6 +42,29 @@ class ReviewService{
         }
     }
 
+    async update(reviewData: any){
+        try {
+            const review = {
+                id: reviewData.id,
+                product: {
+                    id: reviewData.composition.id.toString(),
+                    title: reviewData.composition.title,
+                    type: reviewData.category,
+                    averageRating: parseFloat(reviewData.rating)
+                },
+                title: reviewData.title,
+                text: reviewData.text,
+                img: reviewData.img,
+                tags: reviewData.tags
+            }
+
+            console.log(review)
+            await instance.post<IReview>("/review/update", review);
+        } catch (error) {
+            throw error
+        }
+    }
+
     async getById(reviewId: ReviewId, userId?: string): Promise<IReview> {
         try {
             const params: Record<string, string | undefined> = {};
@@ -50,12 +73,27 @@ class ReviewService{
                 params.userId = userId;
             }
 
-            const response = await instance.get("/review/getById", {
+            const response = await instance.get<IReview>("/review/getById", {
                 params: {
                     reviewId,
                     ...params,
                 },
             });
+
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getByUser(userId: string): Promise<IReview[]> {
+        try {
+            const response = await instance.get<IReview[]>("/review/getReviewByUser", {
+                params: {
+                    userId
+                },
+            });
+
 
             return response.data;
         } catch (error) {
@@ -77,11 +115,17 @@ class ReviewService{
         }
     }
 
-    async delete(reviewId: ReviewId) {
+    async delete(reviewIds: string[]) {
         try {
-            await instance.delete(`/review/delete/${reviewId}`);
+            const reviews= {
+                reviewIds: reviewIds
+            }
+            console.log(reviewIds)
+
+            console.log(reviews)
+            await instance.post<string[]>('/review/delete', reviews);
         } catch (error) {
-            throw error
+            throw error;
         }
     }
 

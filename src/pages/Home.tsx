@@ -6,7 +6,7 @@ import ReviewsTable from "../layouts/ReviewsTable";
 function Profile() {
 
     return (
-        <Paper sx={{borderRadius:'0px', pb:'40px'}}>
+        <Paper sx={{borderRadius:'0px', pb:'40px', height:'100%'}}>
             <Container maxWidth="lg">
                 <Header/>
                 <TagCloud/>

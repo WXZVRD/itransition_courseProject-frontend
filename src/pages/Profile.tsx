@@ -1,146 +1,151 @@
-import {Button, Container, Paper, Toolbar} from "@mui/material";
+import {Box, Button, CircularProgress, Container, Paper, Toolbar} from "@mui/material";
 import Header from "../layouts/Header";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import UserCard from "../components/UserCard";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {DataGrid} from "@mui/x-data-grid";
+import {useAppDispatch, useAppSelector} from "../redux/hooks";
+import {deleteReview, fetchReview} from "../redux/slices/reviewSlice";
+import {STATUS} from "../types/common";
+import {formatDate} from "../utils/formateDate";
+import {IUser} from "../types/user/User";
+import UserServices from "../services/userServices";
 
-const header = [
-    {
-        field: 'title',
-        headerName: 'Title',
-        width: 250,
-        renderCell: (params: any) => (
-            <Link
-                to={`/post/${params.row.id}`}
-                style={{ textDecoration: 'none', color: 'inherit', cursor:'pointer' }}
-            >
-                {params.value}
-            </Link>
-        ),
-    },
-    { field: 'composition', headerName: 'Composition', width: 250 },
-    { field: 'type', headerName: 'Type', width: 150 },
-    { field: 'createdAt', headerName: 'Created At', width: 200 },
-    { field: 'avgRating', headerName: 'Average Rating', width: 150 },
-];
-
-const reviews = [
-    {
-        id: 1,
-        title: 'Review 1',
-        composition: 'Twisted Metal',
-        type: 'Game',
-        createdAt: '20 August, 2023',
-        avgRating: '3.56'
-    },
-    {
-        id: 2,
-        title: 'Review 2',
-        composition: 'Red Dead Redemption 2',
-        type: 'Game',
-        createdAt: '15 August, 2023',
-        avgRating: '4.78'
-    },
-    {
-        id: 3,
-        title: 'Review 3',
-        composition: 'The Lord of the Rings',
-        type: 'Movie',
-        createdAt: '10 August, 2023',
-        avgRating: '4.2'
-    },
-    {
-        id: 4,
-        title: 'Review 4',
-        composition: 'Harry Potter and the Sorcerer\'s Stone',
-        type: 'Book',
-        createdAt: '5 August, 2023',
-        avgRating: '4.9'
-    },
-    {
-        id: 5,
-        title: 'Review 5',
-        composition: 'Breaking Bad',
-        type: 'TV Show',
-        createdAt: '2 August, 2023',
-        avgRating: '4.6'
-    },
-    {
-        id: 6,
-        title: 'Review 6',
-        composition: 'The Witcher 3: Wild Hunt',
-        type: 'Game',
-        createdAt: '1 August, 2023',
-        avgRating: '4.7'
-    },
-    {
-        id: 7,
-        title: 'Review 7',
-        composition: 'Sherlock Holmes',
-        type: 'Book',
-        createdAt: '28 July, 2023',
-        avgRating: '4.4'
-    },
-    {
-        id: 8,
-        title: 'Review 8',
-        composition: 'Inception',
-        type: 'Movie',
-        createdAt: '25 July, 2023',
-        avgRating: '4.8'
-    },
-    {
-        id: 9,
-        title: 'Review 9',
-        composition: 'Game of Thrones',
-        type: 'TV Show',
-        createdAt: '22 July, 2023',
-        avgRating: '4.5'
-    },
-    {
-        id: 10,
-        title: 'Review 10',
-        composition: 'Pride and Prejudice',
-        type: 'Book',
-        createdAt: '20 July, 2023',
-        avgRating: '4.0'
-    }
-];
-
-const author = {
-    authorImg: 'https://wallpaperaccess.com/full/395934.jpg',
-    authorName: 'Kiril Horih',
-    likes: 5
-}
 
 const Profile = () => {
-    const [selectedItems, setSelectedItems] = useState<number[]>([]);
+    const dispatch = useAppDispatch()
+    const { id } = useParams()
+    const [user, setUser] = useState<IUser>()
+    const me = useAppSelector(state => state.auth.user)
+    const { reviewList, status } = useAppSelector(state => state.reviews)
+
+    const [selectedItems, setSelectedItems] = useState<string[]>([]);
+
+    const header = [
+        {
+            field: 'title',
+            headerName: 'Title',
+            width: 250,
+            renderCell: (params: any) => (
+                <Link
+                    to={`/post/${params.row.id}`}
+                    style={{ textDecoration: 'none', color: 'inherit', cursor:'pointer' }}
+                >
+                    {params.value}
+                </Link>
+            ),
+        },
+        {
+            field: 'product.title',
+            headerName: 'Composition',
+            width: 220,
+            valueGetter: (params:any) => {
+                return params.row.product?.title;
+            },
+        },
+        {
+            field: 'type',
+            headerName: 'Type',
+            width: 120 },
+        {
+            field: 'grade',
+            headerName: 'Grade',
+            width: 120
+        },
+        {
+            field: 'product.averageRating',
+            headerName: 'AvgRating',
+            width: 120,
+            valueGetter: (params:any) => {
+                return params.row.product?.averageRating;
+            },
+        },
+        {
+            field: 'createdAt',
+            headerName: 'Created At',
+            width: 180,
+            valueGetter: (params:any) => {
+                return formatDate(params.row.createdAt);
+            },
+        },
+        {
+            field: 'edit',
+            headerName: me && me.id === id || me?.isAdmin ? 'Edit' : '',
+            width: 70,
+            sortable: false,
+            filterable: false,
+            renderCell: (params: any) => (
+                me && me.id === id || me?.isAdmin ? (
+                    <Link
+                        to={`/post/edit/${params.row.id}`}
+                        style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}
+                    >
+                        <Button sx={{ width: '100%' }}>Edit</Button>
+                    </Link>
+                ) : null
+            ),
+        },
+    ];
+
+
+    useEffect(() => {
+        if (id){
+            dispatch(fetchReview(id))
+            const fetchUser = async () => {
+                const res = await UserServices.getOneUser(id)
+                setUser(res)
+            }
+            fetchUser()
+        }
+    }, [id])
 
     const handleSelectionChange = (newSelection: any) => {
-        setSelectedItems(newSelection.selectionModel as number[]);
+        setSelectedItems(newSelection)
     };
+
+    const handleDeleteSelected = async () => {
+        dispatch(deleteReview(selectedItems))
+    }
 
     return (
         <Paper sx={{ borderRadius: '0px', height: '100vh' }}>
             <Container maxWidth="lg">
                 <Header />
-                <UserCard user={author} />
-                <Toolbar>
-                    <Button variant={"contained"}>Delete</Button>
-                </Toolbar>
-                <DataGrid
-                    rows={reviews}
-                    columns={header}
-                    onRowSelectionModelChange={handleSelectionChange}
-                    initialState={{
-                        pagination: {
-                            paginationModel: { page: 0, pageSize: 5 },
-                        },
-                    }}
-                    pageSizeOptions={[5, 10]}
-                    checkboxSelection
-                />
+                { user && <UserCard user={user} />}
+
+                    {status === STATUS.LOADING ? (
+                        <Box sx={{mt:'100px', display:'flex', alignItems:'center', justifyContent:'center', width:'100%'}}>
+                            <CircularProgress />
+                        </Box>
+                    ) : (
+                       <>
+                           {
+                               me && me.id === id || me?.isAdmin ? (
+                                   <Toolbar>
+                                       <Button
+                                           disabled={!selectedItems.length}
+                                           onClick={handleDeleteSelected}
+                                           variant="contained"
+                                       >
+                                           Delete
+                                       </Button>
+                                   </Toolbar>
+                               ) : ''
+                           }
+                           <DataGrid
+                               rows={reviewList}
+                               columns={header}
+                               onRowSelectionModelChange={handleSelectionChange}
+                               initialState={{
+                                   pagination: {
+                                       paginationModel: { page: 0, pageSize: 5 },
+                                   },
+                               }}
+                               pageSizeOptions={[5, 10]}
+                               checkboxSelection
+                           />
+                       </>
+                    )}
             </Container>
         </Paper>
     )

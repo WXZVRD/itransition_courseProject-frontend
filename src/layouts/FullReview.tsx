@@ -14,7 +14,7 @@ interface IFullReviewProp {
 const FullReview: FC<IFullReviewProp> = ({ review }) => {
     console.log(review)
     const modules = {
-        toolbar: false, // Отключите панель инструментов
+        toolbar: false,
     };
 
     return(

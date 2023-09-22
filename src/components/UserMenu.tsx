@@ -17,6 +17,7 @@ import {useNavigate} from "react-router-dom";
 import {IUser} from "../types/user/User";
 import {switchTheme} from "../redux/slices/appSlice";
 import AddIcon from '@mui/icons-material/Add';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 interface IUserMenu {
     user: IUser
@@ -33,6 +34,9 @@ const UserMenu: FC<IUserMenu> = ({ user }) => {
 
     const handleGoToProfile = (event: any) => {
         navigate(`/profile/${user.id}`)
+    };
+    const handleGoToAdmin = (event: any) => {
+        navigate(`/admin`)
     };
 
     const handleClose = () => {
@@ -115,6 +119,14 @@ const UserMenu: FC<IUserMenu> = ({ user }) => {
                     </ListItemIcon>
                     New Review
                 </MenuItem>
+                { user.isAdmin && (
+                    <MenuItem onClick={handleGoToAdmin}>
+                        <ListItemIcon>
+                            <AdminPanelSettingsIcon fontSize="medium" />
+                        </ListItemIcon>
+                        Admin Panel
+                    </MenuItem>
+                )}
                 <MenuItem onClick={handleSwitchTheme}>
                     <MySwitch /> Dark Theme
                 </MenuItem>

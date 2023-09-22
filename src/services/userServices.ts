@@ -1,6 +1,4 @@
 import instance from "../axios";
-import {IReview} from "../types/review/Review";
-import {UserId} from "../types/common";
 import {IUser} from "../types/user/User";
 
 
@@ -16,33 +14,49 @@ export class UserServices{
         }
     }
 
-    async block(userId: string) {
+    async getOneUser( userId: string ) {
         try {
-            await instance.post("/user/blockUser", {userId: userId})
+            console.log("FETCHING USER SERVICE")
+
+            const response = await instance.get<IUser>("/user/getOneUser", {
+                params: {
+                    userId
+                }
+            });
+
+            return response.data;
         } catch (error) {
             throw error
         }
     }
 
-    async unblock(userId: UserId) {
+    async block(usersId: string[]) {
         try {
-            await instance.post("/user/unblockUser", { userId: userId })
+            await instance.post("/user/blockUser", usersId)
         } catch (error) {
             throw error
         }
     }
 
-    async makeAdmin(userId: UserId) {
+    async unblock(usersId: string[]) {
         try {
-            await instance.post("/user/makeAdmin", {userId: userId})
+            await instance.post("/user/unblockUser", usersId)
         } catch (error) {
             throw error
         }
     }
 
-    async delete(userId: UserId) {
+    async makeAdmin(usersId: string[]) {
         try {
-            await instance.post("/user/deleteUser", {userId: userId})
+            await instance.post("/user/makeAdmin", usersId)
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async delete(usersId: string[]) {
+        try {
+            await instance.post("/user/deleteUser", usersId)
         } catch (error) {
             throw error
         }

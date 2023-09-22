@@ -27,7 +27,7 @@ const TagCloud = () => {
                 Tag Cloud
             </Typography>
 
-            <Stack direction="row" spacing={1}>
+            <Stack direction="row" spacing={1} sx={{ flexWrap: "wrap", gap: "20px" }} >
                 {tags ? (
                     tags.length > 0 ? (
                         tags.map((tag, index) => (
