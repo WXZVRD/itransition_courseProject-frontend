@@ -19,11 +19,14 @@ function App() {
     const theme = useAppSelector(state => state.app.theme)
 
     useEffect(() => {
+        console.log("Getting token...")
         const token = getTokenFromCookie()
         if (token){
+            console.log("We have token...")
             const user = getUserDataFromCookie()
             dispatch(getAuthData(user))
         }
+        console.log("Ending useEffect...")
     }, [])
 
     return (
