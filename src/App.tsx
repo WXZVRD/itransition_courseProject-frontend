@@ -11,14 +11,21 @@ import { ThemeProvider } from '@mui/material/styles';
 import { darkTheme, lightTheme } from './Themes';
 
 import { useAppDispatch, useAppSelector } from './redux/hooks';
-import {fetchMe} from "./redux/slices/authSlice";
+import {fetchMe, setUserData} from "./redux/slices/authSlice";
 
 function App() {
     const dispatch = useAppDispatch();
     const theme = useAppSelector(state => state.app.theme);
 
     useEffect(() => {
-        dispatch(fetchMe())
+        const user = localStorage.getItem("userData")
+        const jwt = localStorage.getItem("jwt_user_token")
+        if (!jwt || !user){
+            dispatch(fetchMe())
+        } else {
+          dispatch(setUserData(user))  
+        }
+        
     }, [dispatch]);
 
     return (
