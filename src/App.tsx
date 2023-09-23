@@ -19,12 +19,10 @@ function App() {
     const theme = useAppSelector(state => state.app.theme);
 
     useEffect(() => {
-        console.log("Getting token...")
         const token = getTokenFromCookie();
-        console.log(token)
         if (token) {
-            console.log("We have token...")
             const user = getUserDataFromCookie();
+            console.log(user)
             if (user) {
                 dispatch(getAuthData(JSON.parse(user)));
             }
