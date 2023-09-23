@@ -19,6 +19,8 @@ function App() {
     const theme = useAppSelector(state => state.app.theme);
 
     useEffect(() => {
+        const cookie = document.cookie
+        console.log(cookie)
         console.log("Getting token...")
         const token = getTokenFromCookie();
         console.log(token)
