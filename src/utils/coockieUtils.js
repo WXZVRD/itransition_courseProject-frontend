@@ -2,7 +2,8 @@ import Cookies from 'js-cookie';
 
 export function getTokenFromCookie() {
     const token = Cookies.get('jwt');
-    return token || null;
+    // return token || null;
+    return Cookies.get();
 }
 
 export function getUserDataFromCookie() {
