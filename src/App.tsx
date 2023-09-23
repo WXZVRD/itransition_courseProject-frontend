@@ -21,6 +21,7 @@ function App() {
     useEffect(() => {
         console.log("Getting token...")
         const token = getTokenFromCookie();
+        console.log(token)
         if (token) {
             console.log("We have token...")
             const user = getUserDataFromCookie();
