@@ -1,26 +1,16 @@
-import React from 'react';
-import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
 
-function getTokenFromCookie() {
-    console.log("Getting token")
-
-  const [cookies] = useCookies(['jwt']);
-    console.log(cookies)
-  return cookies.jwt || null;
+export function getTokenFromCookie() {
+    const token = Cookies.get('jwt');
+    return token || null;
 }
 
-function getUserDataFromCookie() {
-  const [cookies] = useCookies(['user']);
-  return cookies.user || null;
+export function getUserDataFromCookie() {
+    const userData = Cookies.get('user');
+    return userData || null;
 }
 
-function clearCookies() {
-  const [, removeJwt] = useCookies(['jwt']);
-  const [, removeUser] = useCookies(['user']);
-
-  removeJwt('jwt');
-  removeUser('user');
+export function clearCookies() {
+    Cookies.remove('jwt');
+    Cookies.remove('user');
 }
-
-export { getTokenFromCookie, getUserDataFromCookie, clearCookies };
-
