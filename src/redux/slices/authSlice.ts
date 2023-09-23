@@ -26,6 +26,10 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
+        setUserData: (state, action) => {
+            state.user = action.payload;
+            state.isAuth = true;
+        },
         logout: (state) => {
             state.user = null;
             state.isAuth = false;
@@ -37,7 +41,8 @@ const authSlice = createSlice({
                 state.user = action.payload.user;
                 state.isAuth = true;
 
-                localStorage.setItem("jwt_user_token", action.payload.token)
+                localStorage.setItem("userData", action.payload.token)
+                localStorage.setItem("jwt_user_token", action.payload.user)
             });
     },
 });
@@ -47,4 +52,4 @@ export const authReducer = authSlice.reducer;
 export const selectIsAuth = (state: RootState) => state.auth.isAuth;
 export const selectUser = (state: RootState) => state.auth.user;
 
-export const { logout } = authSlice.actions;
+export const { logout, setUserData } = authSlice.actions;
