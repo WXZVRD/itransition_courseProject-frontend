@@ -1,11 +1,16 @@
 export function getTokenFromCookie() {
+    console.log("Utils token start...")
     const cookies = document.cookie.split('; ');
+    console.log("Cookie is ready!")
+    console.log(cookies)
     for (const cookie of cookies) {
         const [name, value] = cookie.split('=');
         if (name === 'jwt') {
+            console.log("Whe found JWT")
             return value;
         }
     }
+    console.log("Nothing was founded")
     return null;
 }
 
