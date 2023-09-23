@@ -17,25 +17,12 @@ const SideBar: FC<ISideBarProps> = ({isOpen, setDrawer }) => {
         <Drawer anchor="left" open={isOpen} onClose={() => setDrawer(false)}>
             <Hidden mdUp>
                 <List>
-                    {isAuth ? (
-                        <>
-                            <ListItem>
-                                <ListItemText primary="Profile" />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText primary="Logout" />
-                            </ListItem>
-                        </>
-                    ) : (
-                        <>
-                            <ListItem>
-                                <AuthButton socialIcon={<GoogleIcon />} socialTitle={"google"} />
-                            </ListItem>
-                            <ListItem>
-                                <AuthButton socialIcon={<GitHubIcon />} socialTitle={"github"} />
-                            </ListItem>
-                        </>
-                    )}
+                    <ListItem>
+                        <AuthButton socialIcon={<GoogleIcon />} socialTitle={"google"} />
+                    </ListItem>
+                    <ListItem>
+                        <AuthButton socialIcon={<GitHubIcon />} socialTitle={"github"} />
+                    </ListItem>
                 </List>
             </Hidden>
         </Drawer>

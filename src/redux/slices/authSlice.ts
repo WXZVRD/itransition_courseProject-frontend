@@ -1,43 +1,50 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IUser} from "../../types/user/User";
-import {RootState} from "../store";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { IUser } from "../../types/user/User";
+import { RootState } from "../store";
+import AuthService from "../../services/authService";
+
+export const fetchMe = createAsyncThunk("auth/fetchMe", async () => {
+    try {
+        const res = await AuthService.getMe();
+        return res.data;
+    } catch (error) {
+        throw error;
+    }
+});
 
 interface IinitState {
-    user: IUser | null,
-    isAuth: Boolean
+    user: IUser | null;
+    isAuth: boolean;
 }
 
 const initialState: IinitState = {
     user: null,
-    isAuth: false
-}
+    isAuth: false,
+};
 
 const authSlice = createSlice({
-    name: 'auth',
+    name: "auth",
     initialState,
     reducers: {
-        getAuthData: (state, action: PayloadAction<IUser>) => {
-            state.user = action.payload
-            state.isAuth = true
-        },
         logout: (state) => {
-            state.user = {
-                id: '',
-                name: '',
-                avatar: '',
-                isAdmin: false,
-                isBlocked: false,
-                likes: 0
-            }
-            state.isAuth = false
+            state.user = null;
+            state.isAuth = false;
         },
-    }
-})
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchMe.fulfilled, (state, action) => {
+                state.user = action.payload.user;
+                state.isAuth = true;
 
+                localStorage.setItem("jwt_user_token", action.payload.token)
+            });
+    },
+});
 
 export const authReducer = authSlice.reducer;
 
+export const selectIsAuth = (state: RootState) => state.auth.isAuth;
+export const selectUser = (state: RootState) => state.auth.user;
 
-export const isAuth = (state: RootState) => Boolean(state.auth.user)
-
-export const { logout, getAuthData } = authSlice.actions;
+export const { logout } = authSlice.actions;

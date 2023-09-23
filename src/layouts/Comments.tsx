@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { FC, useEffect } from "react";
 import { fetchComments } from "../redux/slices/commentsSlice";
 import CommentCard from "../components/CommentCard";
-import {ReviewId} from "../types/common";
+import { ReviewId } from "../types/common";
 
 interface ICommentsProp {
     reviewId: ReviewId;
@@ -26,15 +26,20 @@ const Comments: FC<ICommentsProp> = ({ reviewId }) => {
             </Typography>
             {user && <CommentCreator review={reviewId} author={user} />}
             {status === 'loaded' ? (
-                comments.map((el) => (
-                    <CommentCard
-                        author={el.user}
-                        createdAt={el.createdAt}
-                        text={el.text}
-                    />
-                ))
+                comments.length > 0 ? (
+                    comments.map((el) => (
+                        <CommentCard
+                            key={el.id}
+                            author={el.user}
+                            createdAt={el.createdAt}
+                            text={el.text}
+                        />
+                    ))
+                ) : (
+                    !user && <Typography variant="body1" sx={{mb:'40px'}}>Already no any comment.</Typography>
+                )
             ) : (
-                    <Skeleton height={"200px"} />
+                <Skeleton height={"200px"} />
             )}
         </Box>
     );

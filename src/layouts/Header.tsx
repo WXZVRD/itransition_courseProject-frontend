@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {AppBar, Hidden, Toolbar, Typography, IconButton} from "@mui/material";
+import {AppBar, Hidden, Toolbar, Typography, IconButton, Button} from "@mui/material";
 
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -35,16 +35,21 @@ const Header = () => {
                     <Hidden mdDown>
                         {!isAuth && <AuthButton socialIcon={<GoogleIcon/>} socialTitle={'google'}/>}
                         {!isAuth && <AuthButton socialIcon={<GitHubIcon/>} socialTitle={'github'}/>}
-                        {isAuth && user && <UserMenu user={user}/>}
                     </Hidden>
-                    <IconButton
-                        aria-label="open drawer"
-                        onClick={toggleDrawer}
-                        sx={{ display: { md: "none" }, ml:'20px' }}>
-                        <MenuIcon />
-                    </IconButton>
+                    {!isAuth
+                    ? (
+                            <IconButton
+                                aria-label="open drawer"
+                                onClick={toggleDrawer}
+                                sx={{ display: { md: "none" }, ml:'20px' }}>
+                                <MenuIcon />
+                            </IconButton>
+                        )
+                    : (
+                        user && <UserMenu user={user}/>
+                        )}
                 </Toolbar>
-                <SideBar isOpen={isDrawerOpen} setDrawer={setIsDrawerOpen} />
+                <SideBar isOpen={isDrawerOpen} setDrawer={setIsDrawerOpen}/>
             </AppBar>
     );
 };

@@ -12,7 +12,6 @@ import MySwitch from "./Switch";
 import {FC} from "react";
 import {useAppDispatch} from "../redux/hooks";
 import {logout} from "../redux/slices/authSlice";
-import {clearCookies} from "../utils/coockieUtils";
 import {useNavigate} from "react-router-dom";
 import {IUser} from "../types/user/User";
 import {switchTheme} from "../redux/slices/appSlice";
@@ -45,7 +44,7 @@ const UserMenu: FC<IUserMenu> = ({ user }) => {
 
     const handleLogout = () => {
         dispatch(logout())
-        clearCookies()
+        localStorage.clear()
     };
 
     const handleCreateReview = () => {

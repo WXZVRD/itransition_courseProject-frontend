@@ -297,8 +297,13 @@ function ReviewForm() {
                                     <Rating
                                         {...field}
                                         name="rating"
+                                        onChange={(_, value) => {
+                                            console.log(value);
+                                            field.onChange(value);
+                                        }}
                                         defaultValue={0}
                                         precision={0.5}
+                                        max={10}
                                     />
                                 )}
                             />

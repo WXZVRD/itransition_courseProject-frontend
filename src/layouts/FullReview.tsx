@@ -5,6 +5,7 @@ import AuthorInfo from "../components/AuthorInfo";
 import {IReview} from "../types/review/Review";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
+import StarIcon from "@mui/icons-material/Star";
 
 
 interface IFullReviewProp {
@@ -20,7 +21,16 @@ const FullReview: FC<IFullReviewProp> = ({ review }) => {
     return(
         <Box sx={{width:'100%', maxWidth:'742px', height:'100%', pb:'80px'}}>
                 {review.tags.map(tag => <Tag title={tag}/>)}
-                <Typography sx={{margin:'20px 0'}} variant={"h1"}>{ review.title }</Typography>
+            <Typography
+                variant={"body2"}
+                sx={{
+                    display:'flex',
+                    m:'20px 0',
+                    alignItems:'center'}}>
+                <StarIcon sx={{mr:'5px', color:'#ECB43C'}}/>
+                {Math.floor(review.product.averageRating * 10) / 10} {review.product.title}
+            </Typography>
+            <Typography sx={{mb:'20px'}} variant={"h1"}>{ review.title }</Typography>
                 {review && review.user && review.createdAt && (
                     <AuthorInfo
                         author={review.user}

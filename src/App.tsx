@@ -10,24 +10,15 @@ import Home from './pages/Home';
 import { ThemeProvider } from '@mui/material/styles';
 import { darkTheme, lightTheme } from './Themes';
 
-import { getTokenFromCookie, getUserDataFromCookie } from './utils/coockieUtils';
-import { getAuthData } from './redux/slices/authSlice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
+import {fetchMe} from "./redux/slices/authSlice";
 
 function App() {
     const dispatch = useAppDispatch();
     const theme = useAppSelector(state => state.app.theme);
 
     useEffect(() => {
-        const token = getTokenFromCookie();
-        if (token) {
-            const user = getUserDataFromCookie();
-            console.log(user)
-            if (user) {
-                dispatch(getAuthData(JSON.parse(user)));
-            }
-        }
-        console.log("Ending useEffect...")
+        dispatch(fetchMe())
     }, [dispatch]);
 
     return (
