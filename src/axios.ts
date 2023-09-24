@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'https://itransition-courseproject-backend.onrender.com',
+    baseURL: 'http://localhost:3301',
+    withCredentials: true
 })
 
 instance.interceptors.request.use((config) => {

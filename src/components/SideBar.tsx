@@ -1,9 +1,8 @@
-import { Drawer, Hidden, List, ListItem, ListItemText } from "@mui/material";
+import { Drawer, Hidden, List, ListItem } from "@mui/material";
 import React, { FC } from "react";
 import AuthButton from "./authButton";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import {useAppSelector} from "../redux/hooks";
 
 interface ISideBarProps {
     isOpen: boolean;
@@ -11,7 +10,6 @@ interface ISideBarProps {
 }
 
 const SideBar: FC<ISideBarProps> = ({isOpen, setDrawer }) => {
-    const isAuth = useAppSelector(state => state.auth.isAuth);
 
     return (
         <Drawer anchor="left" open={isOpen} onClose={() => setDrawer(false)}>

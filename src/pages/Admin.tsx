@@ -4,11 +4,17 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
-import {blockUsers, deleteUsers, fetchUsers, makeAdmin, unblockUsers} from "../redux/slices/userSlice";
+import {
+    blockUsers,
+    deleteUsers,
+    fetchUsers,
+    makeAdmin,
+    unblockUsers
+} from "../redux/slices/userSlice";
 import {STATUS} from "../types/common";
 import {DataGrid} from "@mui/x-data-grid";
 import {IUser} from "../types/user/User";
-import UserServices from "../services/userServices";
+import {selectUserList, selectUserListStatus} from "../redux/selectors"
 
 const header = [
     {
@@ -75,10 +81,11 @@ function checkIsAdmin(userList: IUser[], selected: string[]) {
 }
 
 const Admin = () => {
-    const dispatch = useAppDispatch()
-    const isAuth = useAppSelector(state => state.auth.isAuth)
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
-    const { status, usersList } = useAppSelector(state => state.user)
+    const dispatch = useAppDispatch()
+
+    const status = useAppSelector(selectUserListStatus)
+    const usersList = useAppSelector(selectUserList)
 
     const handleSelectionChange = (newSelection: any) => {
         setSelectedItems(newSelection);

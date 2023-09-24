@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {AppBar, Hidden, Toolbar, Typography, IconButton, Button} from "@mui/material";
+import {AppBar, Hidden, Toolbar, Typography, IconButton} from "@mui/material";
 
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -12,10 +12,11 @@ import UserMenu from "../components/UserMenu";
 
 import {Link} from "react-router-dom";
 import {useAppSelector} from "../redux/hooks";
+import {selectIsAuth, selectUser} from "../redux/selectors"
 
 const Header = () => {
-    const isAuth = useAppSelector(state => state.auth.isAuth);
-    const user = useAppSelector(state => state.auth.user);
+    const isAuth = useAppSelector(selectIsAuth);
+    const user = useAppSelector(selectUser);
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 

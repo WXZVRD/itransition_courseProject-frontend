@@ -44,7 +44,6 @@ const UserMenu: FC<IUserMenu> = ({ user }) => {
 
     const handleLogout = () => {
         dispatch(logout())
-        localStorage.clear()
     };
 
     const handleCreateReview = () => {

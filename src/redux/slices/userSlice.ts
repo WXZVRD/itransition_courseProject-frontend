@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../types/user/User";
 import UserServices from "../../services/userServices";
 import {STATUS} from "../../types/common";
+import {RootState} from "../store";
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
     try {
@@ -137,6 +138,8 @@ const userSlice = createSlice({
             })
     },
 })
+
+
 
 export const usersReducer = userSlice.reducer
 

@@ -16,7 +16,6 @@ import {useDebounce} from "../utils/debounce";
 import CompositionService from "../services/compositionService";
 import {IComposition} from "../types/common";
 import {useNavigate, useParams} from "react-router-dom";
-import {IProduct} from "../types/product/product";
 
 const categories = [
     { label: 'Books' },

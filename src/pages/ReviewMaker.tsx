@@ -4,10 +4,11 @@ import ReviewForm from "../layouts/ReviewForm";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAppSelector} from "../redux/hooks";
+import {selectIsAuth} from "../redux/selectors";
 
 const ReviewMaker = () => {
     const navigate = useNavigate()
-    const isAuth = useAppSelector(state => state.auth.isAuth)
+    const isAuth = useAppSelector(selectIsAuth)
 
 
     useEffect(() => {

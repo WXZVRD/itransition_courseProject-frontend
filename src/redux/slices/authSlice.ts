@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../../types/user/User";
-import { RootState } from "../store";
 import AuthService from "../../services/authService";
 
 export const fetchMe = createAsyncThunk("auth/fetchMe", async () => {
@@ -33,6 +32,8 @@ const authSlice = createSlice({
         logout: (state) => {
             state.user = null;
             state.isAuth = false;
+
+            localStorage.clear()
         },
     },
     extraReducers: (builder) => {
@@ -41,15 +42,14 @@ const authSlice = createSlice({
                 state.user = action.payload.user;
                 state.isAuth = true;
 
-                localStorage.setItem("userData", action.payload.token)
-                localStorage.setItem("jwt_user_token", action.payload.user)
+                localStorage.setItem("userData", JSON.stringify(action.payload.user));
+                localStorage.setItem("jwt_user_token", action.payload.token)
             });
     },
 });
 
 export const authReducer = authSlice.reducer;
 
-export const selectIsAuth = (state: RootState) => state.auth.isAuth;
-export const selectUser = (state: RootState) => state.auth.user;
+
 
 export const { logout, setUserData } = authSlice.actions;

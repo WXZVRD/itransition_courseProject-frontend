@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {IAuthor} from "../../types/user/User";
 import CommentsServices from "../../services/commentsServices";
 import {STATUS} from "../../types/common";
+import {RootState} from "../store";
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async (reviewId: string) => {
     try {
@@ -74,6 +75,8 @@ const commentsSlice = createSlice({
 
     }
 })
+
+
 
 
 export const commentsReducer = commentsSlice.reducer;

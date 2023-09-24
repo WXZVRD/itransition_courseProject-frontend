@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { IReview } from "../../types/review/Review";
 import ReviewServices from "../../services/ReviewServices";
 import {STATUS} from "../../types/common";
+import {RootState} from "../store";
 
 export const fetchReview = createAsyncThunk("reviews/fetchReview", async (userId: string) => {
     try {
@@ -69,5 +70,7 @@ const reviewSlice = createSlice({
 
     },
 });
+
+
 
 export const reviewReducer = reviewSlice.reducer;

@@ -10,14 +10,17 @@ import {STATUS} from "../types/common";
 import {formatDate} from "../utils/formateDate";
 import {IUser} from "../types/user/User";
 import UserServices from "../services/userServices";
+import {selectReviews, selectReviewsStatus, selectUser} from "../redux/selectors";
 
 
 const Profile = () => {
+    const status = useAppSelector(selectReviewsStatus)
+    const reviewList = useAppSelector(selectReviews)
+    const me = useAppSelector(selectUser)
+
     const dispatch = useAppDispatch()
     const { id } = useParams()
     const [user, setUser] = useState<IUser>()
-    const me = useAppSelector(state => state.auth.user)
-    const { reviewList, status } = useAppSelector(state => state.reviews)
 
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
@@ -86,7 +89,6 @@ const Profile = () => {
             ),
         },
     ];
-
 
     useEffect(() => {
         if (id){

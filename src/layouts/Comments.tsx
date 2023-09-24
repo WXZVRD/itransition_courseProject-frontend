@@ -2,9 +2,10 @@ import { Box, Skeleton, Typography } from "@mui/material";
 import CommentCreator from "../components/CommentCreator";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { FC, useEffect } from "react";
-import { fetchComments } from "../redux/slices/commentsSlice";
+import {fetchComments} from "../redux/slices/commentsSlice";
 import CommentCard from "../components/CommentCard";
 import { ReviewId } from "../types/common";
+import {selectComments, selectCommentsStatus, selectUser} from "../redux/selectors"
 
 interface ICommentsProp {
     reviewId: ReviewId;
@@ -12,8 +13,9 @@ interface ICommentsProp {
 
 const Comments: FC<ICommentsProp> = ({ reviewId }) => {
     const dispatch = useAppDispatch();
-    const user = useAppSelector((state) => state.auth.user);
-    const { comments, status } = useAppSelector((state) => state.comments);
+    const user = useAppSelector(selectUser);
+    const comments = useAppSelector(selectComments)
+    const status = useAppSelector(selectCommentsStatus)
 
     useEffect(() => {
         dispatch(fetchComments(reviewId));

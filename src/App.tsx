@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {useEffect} from "react";
 
 import ReviewMaker from './pages/ReviewMaker';
 import Profile from './pages/Profile';
@@ -23,9 +23,9 @@ function App() {
         if (!jwt || !user){
             dispatch(fetchMe())
         } else {
-          dispatch(setUserData(user))  
+            dispatch(setUserData(JSON.parse(user)))
         }
-        
+
     }, [dispatch]);
 
     return (

@@ -15,7 +15,6 @@ const TagCloud = () => {
         const fetchTags = async () => {
             const tagList = await ReviewServices.getTags();
             setTags(tagList);
-            console.log(tagList);
         };
 
         fetchTags();

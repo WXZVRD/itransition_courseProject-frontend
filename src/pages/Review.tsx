@@ -15,10 +15,11 @@ import ReviewServices from '../services/ReviewServices';
 import { IReview } from '../types/review/Review';
 import RatePanel from '../components/RatePanel';
 import { useAppSelector } from '../redux/hooks';
+import {selectUser} from "../redux/selectors";
 
 const Review = () => {
     const { id } = useParams();
-    const user = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector(selectUser);
     const [review, setReview] = useState<IReview | null>(null);
     const [similarReview, setSimilarReview] = useState<IReview[] | null>(null);
 
