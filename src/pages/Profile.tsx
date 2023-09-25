@@ -11,6 +11,7 @@ import {formatDate} from "../utils/formateDate";
 import {IUser} from "../types/user/User";
 import UserServices from "../services/userServices";
 import {selectReviews, selectReviewsStatus, selectUser} from "../redux/selectors";
+import {FormattedMessage} from "react-intl";
 
 
 const Profile = () => {
@@ -129,7 +130,7 @@ const Profile = () => {
                                            onClick={handleDeleteSelected}
                                            variant="contained"
                                        >
-                                           Delete
+                                           <FormattedMessage id={"delete.btn"}/>
                                        </Button>
                                    </Toolbar>
                                ) : ''

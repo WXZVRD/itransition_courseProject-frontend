@@ -14,9 +14,11 @@ import {useAppDispatch} from "../redux/hooks";
 import {logout} from "../redux/slices/authSlice";
 import {useNavigate} from "react-router-dom";
 import {IUser} from "../types/user/User";
-import {switchTheme} from "../redux/slices/appSlice";
+import {switchLang, switchTheme} from "../redux/slices/appSlice";
 import AddIcon from '@mui/icons-material/Add';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import LanguageIcon from '@mui/icons-material/Language';
+import {FormattedMessage} from "react-intl";
 
 interface IUserMenu {
     user: IUser
@@ -55,7 +57,7 @@ const UserMenu: FC<IUserMenu> = ({ user }) => {
     }
 
     const handleSwitchLang = () => {
-
+        dispatch(switchLang())
     }
 
     return (
@@ -109,34 +111,39 @@ const UserMenu: FC<IUserMenu> = ({ user }) => {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <MenuItem onClick={handleGoToProfile}>
-                    <Avatar src={user.avatar} /> Profile
+                    <Avatar src={user.avatar} />
+                    <FormattedMessage id="profile.btn" defaultMessage="Switch Language" />
                 </MenuItem>
                 <MenuItem onClick={handleCreateReview}>
                     <ListItemIcon>
                         <AddIcon fontSize="medium" />
                     </ListItemIcon>
-                    New Review
+                    <FormattedMessage id="new.review.btn" defaultMessage="Switch Language" />
                 </MenuItem>
                 { user.isAdmin && (
                     <MenuItem onClick={handleGoToAdmin}>
                         <ListItemIcon>
                             <AdminPanelSettingsIcon fontSize="medium" />
                         </ListItemIcon>
-                        Admin Panel
+                        <FormattedMessage id="admin.panel.btn" defaultMessage="Switch Language" />
                     </MenuItem>
                 )}
                 <MenuItem onClick={handleSwitchTheme}>
-                    <MySwitch /> Dark Theme
+                    <MySwitch />
+                    <FormattedMessage id="switch.theme" defaultMessage="Switch Language" />
                 </MenuItem>
                 <MenuItem onClick={handleSwitchLang}>
-                    <MySwitch /> Switch Language
+                    <ListItemIcon>
+                        <LanguageIcon fontSize="medium" />
+                    </ListItemIcon>
+                    <FormattedMessage id="switch.language" defaultMessage="Switch Language" />
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>
-                    Logout
+                    <FormattedMessage id="exit.btn" defaultMessage="Switch Language" />
                 </MenuItem>
             </Menu>
         </>

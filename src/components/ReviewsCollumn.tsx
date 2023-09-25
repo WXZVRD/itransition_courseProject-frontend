@@ -2,6 +2,7 @@ import { Box, Grid, Skeleton, Typography } from "@mui/material";
 import { FC } from "react";
 import ReviewCard from "./ReviewCard";
 import { IReview } from "../types/review/Review";
+import {FormattedMessage} from "react-intl";
 
 interface IReviewCollumnProp {
     collumnTitle: string;
@@ -13,7 +14,7 @@ const ReviewsCollumn: FC<IReviewCollumnProp> = ({collumnTitle, collumnContent = 
     return (
         <Box sx={{ pt: "32px" }}>
             <Typography variant={"h3"} fontWeight={700} mb={"32px"}>
-                {collumnTitle}
+                <FormattedMessage id={collumnTitle} />
             </Typography>
             {collumnContent ? (
                 collumnContent.length > 0 ? (

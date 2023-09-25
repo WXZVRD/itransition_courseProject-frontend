@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { Paper, Rating, IconButton, Box, Typography } from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ReviewServices from "../services/ReviewServices";
+import {useIntl} from "react-intl";
 
 interface IRatePanel {
     rate: number | null;
@@ -14,6 +15,11 @@ interface IRatePanel {
 const RatePanel: FC<IRatePanel> = ({ rate, likes, productId, authorId, reviewId }) => {
     const [rating, setRating] = useState<number | null>(rate);
     const [liked, setLiked] = useState<boolean>(likes);
+
+    const intl = useIntl()
+    const likePut = intl.formatMessage({ id: "like.idle" })
+    const likePutted = intl.formatMessage({ id: "like.ready" })
+    const rateText = intl.formatMessage({ id: "rate" })
 
     const handleLike = async () => {
         setLiked(!liked);
@@ -36,7 +42,7 @@ const RatePanel: FC<IRatePanel> = ({ rate, likes, productId, authorId, reviewId 
                     <ThumbUpIcon sx={{ color: liked ? '#FF2D55' : 'primary' }} />
                 </IconButton>
                 <Typography variant="body2" sx={{ ml: '8px' }}>
-                    {liked ? 'Already Liked' : 'Like Review'}
+                    {liked ? likePutted : likePut}
                 </Typography>
             </Box>
 
@@ -50,7 +56,7 @@ const RatePanel: FC<IRatePanel> = ({ rate, likes, productId, authorId, reviewId 
                     }}
                 />
                 <Typography variant="body2" sx={{ ml: '8px' }}>
-                    Rate Composition
+                    {rateText}
                 </Typography>
             </Box>
         </Paper>

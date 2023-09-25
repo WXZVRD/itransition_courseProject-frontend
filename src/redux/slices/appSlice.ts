@@ -31,11 +31,12 @@ const appSlice = createSlice({
                 state.theme = Theme.DARK;
             }
         },
-        switchLang: (state, action: PayloadAction<Lang>) => {
-            if (!Object.values(Lang).includes(action.payload)) {
-                return state;
+        switchLang: (state) => {
+            if (state.lang === Lang.EN){
+                state.lang = Lang.RU
+            } else{
+                state.lang = Lang.EN
             }
-            state.lang = action.payload;
         }
     }
 })

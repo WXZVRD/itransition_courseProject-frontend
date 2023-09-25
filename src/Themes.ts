@@ -12,54 +12,46 @@ export const lightTheme = createTheme({
         },
     },
     typography: {
-        fontFamily: 'Work Sans, Lato',
+        fontFamily: 'Montserrat',
         h1: {
             fontSize: '24px',
             fontWeight: 600,
             color: '#181A2A',
-            fontFamily: 'Work Sans'
         },
         h2: {
             fontSize: '24px',
             fontWeight: 600,
             color: '#181A2A',
-            fontFamily: 'Work Sans'
         },
         h3: {
             fontSize: '24px',
             fontWeight: 600,
             color: '#181A2A',
-            fontFamily: 'Work Sans'
         },
         h4: {
             fontSize: '24px',
             fontWeight: 600,
             color: '#181A2A',
-            fontFamily: 'Work Sans'
         },
         h5: {
             fontSize: '24px',
             fontWeight: 600,
             color: '#181A2A',
-            fontFamily: 'Work Sans'
         },
         h6: {
             fontSize: '24px',
             fontWeight: 600,
             color: '#181A2A',
-            fontFamily: 'Work Sans'
         },
         body1: {
             fontSize: '16px',
             fontWeight: 400,
             color: '#97989F',
-            fontFamily: 'Work Sans'
         },
         body2: {
             fontSize: '16px',
             fontWeight: 500,
             color: '#97989F',
-            fontFamily: 'Work Sans'
         },
     },
     components: {
@@ -69,7 +61,6 @@ export const lightTheme = createTheme({
                     fontSize: '14px',
                     fontWeight: 500,
                     color: '#4B6BFB',
-                    fontFamily: 'Work Sans',
                     background: '#f6f8ff',
                     borderRadius:'6px'
                 }
@@ -121,55 +112,47 @@ export const darkTheme = createTheme({
         },
     },
     typography: {
-        fontFamily: 'Work Sans, Roboto, sans-serif',
+        fontFamily: 'Montserrat',
         h1: {
             fontSize: '36px',
             fontWeight: 600,
             color: '#FFF',
             lineHeight: '40px',
-            fontFamily: 'Work Sans'
         },
         h2: {
             fontSize: '24px',
             fontWeight: 600,
             color: '#fff',
-            fontFamily: 'Work Sans'
         },
         h3: {
             fontSize: '24px',
             fontWeight: 600,
             color: '#fff',
-            fontFamily: 'Work Sans'
         },
         h4: {
             fontSize: '24px',
             fontWeight: 600,
             color: '#fff',
-            fontFamily: 'Work Sans'
         },
         h5: {
             fontSize: '20px',
             fontWeight: 600,
             color: '#fff',
-            fontFamily: 'Work Sans'
         },
         h6: {
             fontSize: '24px',
             fontWeight: 600,
             color: '#fff',
-            fontFamily: 'Work Sans'
         },
         body1: {
             fontSize: '16px',
             fontWeight: 400,
             color: '#97989F',
-            fontFamily: 'Work Sans'
         },
         body2: {
             fontSize: '16px',
             fontWeight: 500,
             color: '#97989F',
-            fontFamily: 'Work Sans'
         },
     },
     components: {
@@ -179,7 +162,6 @@ export const darkTheme = createTheme({
                     fontSize: '14px',
                     fontWeight: 500,
                     color: '#4b6bfb',
-                    fontFamily: 'Work Sans',
                     background: '#1b1e34',
                     borderRadius:'6px'
                 }
@@ -225,7 +207,6 @@ export const darkTheme = createTheme({
                     fontSize: '14px',
                     fontWeight: 500,
                     color: '#4b6bfb',
-                    fontFamily: 'Work Sans',
                     background: '#1b1e34',
                     border:'none',
                     borderRadius:'6px'
@@ -238,7 +219,6 @@ export const darkTheme = createTheme({
                     fontSize: '14px',
                     fontWeight: 500,
                     color: '#4b6bfb',
-                    fontFamily: 'Work Sans',
                     background: '#1b1e34',
                     border:'none',
                     borderRadius:'6px'

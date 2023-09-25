@@ -6,6 +6,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { IAuthor } from "../types/user/User";
 import { useAppDispatch } from "../redux/hooks";
 import { createComment } from "../redux/slices/commentsSlice";
+import {useIntl} from "react-intl";
 
 interface ICommentCardProp {
     author: IAuthor;
@@ -15,6 +16,9 @@ interface ICommentCardProp {
 const CommentCreator: FC<ICommentCardProp> = ({ review, author }) => {
     const dispatch = useAppDispatch();
     const [text, setText] = useState<string>("");
+    const intl = useIntl();
+    const commentPlaceholder = intl.formatMessage({ id: 'comment.placeholder' });
+    const submitBtn = intl.formatMessage({ id: 'submit.btn' });
 
     const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value);
@@ -34,7 +38,7 @@ const CommentCreator: FC<ICommentCardProp> = ({ review, author }) => {
             <TextField
                 sx={{ mt: "20px" }}
                 onChange={handleTextChange}
-                placeholder={"Make the history, leave the comment"}
+                placeholder={commentPlaceholder}
                 variant={"outlined"}
                 multiline={true}
                 value={text}
@@ -46,7 +50,7 @@ const CommentCreator: FC<ICommentCardProp> = ({ review, author }) => {
                 variant="contained"
                 startIcon={<SendIcon />}
             >
-                Submit
+                {submitBtn}
             </Button>
         </Paper>
     );

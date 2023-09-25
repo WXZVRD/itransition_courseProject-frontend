@@ -15,24 +15,25 @@ import {STATUS} from "../types/common";
 import {DataGrid} from "@mui/x-data-grid";
 import {IUser} from "../types/user/User";
 import {selectUserList, selectUserListStatus} from "../redux/selectors"
+import {FormattedMessage} from "react-intl";
 
 const header = [
     {
         field: 'avatar',
-        headerName: 'AVATAR',
+        headerName: "AVATAR",
         width: 120,
         renderCell: (params: any) => (
-            <Avatar  src={params.value}/>
+            <Avatar src={params.value} />
         )
     },
     {
         field: 'name',
-        headerName: 'FULL NAME',
+        headerName: "NAME",
         width: 250,
         renderCell: (params: any) => (
             <Link
                 to={`/profile/${params.row.id}`}
-                style={{ textDecoration: 'none', color: 'inherit', cursor:'pointer' }}
+                style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}
             >
                 {params.value}
             </Link>
@@ -40,17 +41,21 @@ const header = [
     },
     {
         field: 'isAdmin',
-        headerName: 'ROLE',
+        headerName: "ROLE",
         width: 250,
-        valueGetter: (params: any) => params.row.isAdmin ? 'ADMIN' : 'USER'
+        valueGetter: (params: any) => params.row.isAdmin ? "ADMIN" : "USER"
     },
     {
         field: 'isBlocked',
-        headerName: 'STATUS',
+        headerName: "STATUS",
         width: 250,
-        valueGetter: (params: any) => params.row.isBlocked ? 'BLOCKED' : 'ACTIVE'
+        valueGetter: (params: any) => params.row.isBlocked ? "BLOCKED" : "ACTIVE"
     },
-    { field: 'likes', headerName: 'LIKES', width: 220 },
+    {
+        field: 'likes',
+        headerName: "LIKES",
+        width: 220
+    },
 ];
 
 function checkHaveBlocked(userList: IUser[], selected: string[]) {
@@ -115,7 +120,9 @@ const Admin = () => {
         <Paper sx={{width:'100%', borderRadius:0, height:'100%', pb:'132px'}}>
             <Container maxWidth="lg">
                 <Header />
-                <Typography sx={{m:'20px 0'}} variant={"h1"}>Admin Panel</Typography>
+                <Typography sx={{m:'20px 0'}} variant={"h1"}>
+                    <FormattedMessage id={"admin.label"}/>
+                </Typography>
                 { status === STATUS.LOADING
                 ? (
                         <Box sx={{mt:'100px', display:'flex', alignItems:'center', justifyContent:'center', width:'100%'}}>
@@ -124,28 +131,38 @@ const Admin = () => {
                     )
                 : (
                     <>
-                        <Toolbar sx={{maxWidth:'500px', width:'100%', justifyContent:'space-between', mb:'20px'}}>
+                        <Toolbar sx={{mb:'20px'}}>
                             <Button
                                 onClick={handleDelete}
-                                variant={"contained"}>
-                                Delete
+                                variant={"contained"}
+                                sx={{mr:"20px"}}
+                                >
+                                <FormattedMessage id={"delete.btn"}/>
                             </Button>
                             <Button
                                 disabled={checkHaveBlocked(usersList, selectedItems) as boolean}
                                 onClick={handleBlock}
-                                variant={"contained"}>
-                                Block
+                                variant={"contained"}
+                                sx={{mr:"20px"}}
+                                >
+                                <FormattedMessage id={"block.btn"}/>
                             </Button>
                             <Button
                                 disabled={checkHaveUnblocked(usersList, selectedItems) as boolean}
                                 onClick={handleUnblock}
-                                variant={"contained"}>
-                                Unblock</Button>
+                                variant={"contained"}
+                                sx={{mr:"20px"}}
+                                >
+                                <FormattedMessage id={"unblock.btn"}/>
+                            </Button>
                             <Button
                                 disabled={checkIsAdmin(usersList, selectedItems) as boolean}
                                 onClick={handleMakeAdmin}
-                                variant={"contained"}>
-                                Make admin</Button>
+                                variant={"contained"}
+                                sx={{mr:"20px"}}
+                                >
+                                <FormattedMessage id={"make.admin.btn"}/>
+                            </Button>
                         </Toolbar>
                         <DataGrid
                             rows={usersList}

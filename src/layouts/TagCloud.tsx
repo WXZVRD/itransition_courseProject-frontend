@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ReviewServices from "../services/ReviewServices";
 import Skeleton from "@mui/material/Skeleton";
 import Tag from "../components/Tag";
+import {FormattedMessage} from "react-intl";
 
 interface Tag {
     title: string;
@@ -23,7 +24,7 @@ const TagCloud = () => {
     return (
         <Paper sx={{ width: "100%", p: "20px", mt: "20px" }}>
             <Typography variant={"h5"} sx={{ mb: "25px" }}>
-                Tag Cloud
+                <FormattedMessage id={"tag.cloud"}/>
             </Typography>
 
             <Stack direction="row" spacing={1} sx={{ flexWrap: "wrap", gap: "20px" }} >

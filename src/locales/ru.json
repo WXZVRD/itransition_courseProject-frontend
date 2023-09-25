@@ -1,0 +1,48 @@
+{
+  "Latest reviews": "Последние Обзоры",
+  "Most rated reviews": "Лучшие Обзоры",
+  "Similar Review by composition": "Схожие обзоры по композициям",
+  "tag.cloud": "Облако тэгов",
+
+  "comments.title": "Комментарий",
+  "comments.none": "В данный момент нету комментариев.",
+  "comment.placeholder": "Сотвори историю, оставь коммент!",
+
+  "switch.language": "Сменить язык",
+  "switch.theme": "Тёмная тема",
+
+  "admin.panel.btn": "Админ панель",
+  "new.review.btn": "Новый обзор",
+  "profile.btn": "Профиль",
+  "exit.btn": "Выйти",
+  "submit.btn": "Отправить",
+
+  "like.idle": "Поставить лайк",
+  "like.ready": "Лайк оставлен",
+
+  "rate": "Оценить произведение",
+
+  "fulltext.search": "Поиск",
+
+  "admin.label": "Админ Панель",
+  "make.admin.btn": "Сделать админом",
+  "block.btn": "Заблокировать",
+  "unblock.btn": "Разблокировать",
+  "delete.btn": "Удалить",
+
+  "role.admin": "АДМИН",
+  "role.user": "Пользователь",
+
+  "admin.likes": "ЛАЙКИ",
+  "admin.status": "СТАТУС",
+  "admin.role": "РОЛЬ",
+  "admin.fullName": "ИМЯ",
+  "admin.avatar": "АВАТАР",
+
+  "reviewForm.dragFiles": "Перетащи файл, или нажми чтобы выбрать",
+  "reviewForm.rate": "Оценить",
+  "reviewForm.tags": "*Впишите тэги",
+  "reviewForm.category": "*Выберите категорию",
+  "reviewForm.composition": "*Выберите композицию",
+  "reviewForm.title": "Название"
+}

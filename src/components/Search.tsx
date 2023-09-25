@@ -6,11 +6,14 @@ import MiniReview from "./miniReview";
 import {Box, Card} from "@mui/material";
 import {formatDate} from "../utils/formateDate";
 import MiniComment from "./miniComment";
+import { useIntl } from 'react-intl';
 
 const Search: FC = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [searchResults, setSearchResults] = useState<any[]>([]);
     const debouncedSearch = useDebounce(search, 500)
+    const intl = useIntl();
+    const searchLocalText = intl.formatMessage({ id: 'fulltext.search' });
 
     async function search(query: string) {
         const response = await ProductServices.search(query)
@@ -20,7 +23,6 @@ const Search: FC = () => {
     const onchange = (value: string) => {
         setSearchText(value)
         console.log('OnChange!')
-        console.log(searchResults)
         debouncedSearch(value)
     }
 
@@ -29,7 +31,7 @@ const Search: FC = () => {
             <TextField
                 sx={{ width: '250px', mr:'15px' }}
                 size={"small"}
-                placeholder={'Fulltext search'}
+                placeholder={searchLocalText}
                 fullWidth
                 value={searchText}
                 onChange={e => onchange(e.target.value)}

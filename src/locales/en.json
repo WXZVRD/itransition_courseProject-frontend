@@ -1,0 +1,48 @@
+{
+  "Latest reviews": "Latest review",
+  "Most rated reviews": "Most rated review",
+  "Similar Review by composition": "Similar review's by composition",
+  "tag.cloud": "Tags cloud",
+
+  "comments.title": "Comments",
+  "comments.none": "No comments.",
+  "comment.placeholder": "Make history, leave the comment!",
+
+  "switch.language": "Switch Lang",
+  "switch.theme": "Dark Theme",
+
+  "admin.panel.btn": "Admin Panel",
+  "new.review.btn": "New Review",
+  "profile.btn": "Profile",
+  "exit.btn": "Exit",
+  "submit.btn": "Submit",
+
+  "like.idle": "Like review",
+  "like.ready": "Already liked",
+
+  "rate": "Rate composition",
+
+  "fulltext.search": "Search",
+
+  "admin.label": "Admin panel",
+  "make.admin.btn": "Make admin",
+  "block.btn": "Block",
+  "unblock.btn": "Unblock",
+  "delete.btn": "Delete",
+
+  "role.admin": "ADMIN",
+  "role.user": "USER",
+
+  "admin.likes": "LIKES",
+  "admin.status": "STATUS",
+  "admin.role": "ROLE",
+  "admin.fullName": "NAME",
+  "admin.avatar": "AVATAR",
+
+  "reviewForm.dragFiles": "Drag the file, or click to select",
+  "reviewForm.rate": "Rate",
+  "reviewForm.tags": "*Put tags",
+  "reviewForm.category": "*Choose category",
+  "reviewForm.composition": "*Choose composition",
+  "reviewForm.title": "Title"
+}

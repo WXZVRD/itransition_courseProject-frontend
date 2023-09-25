@@ -6,6 +6,7 @@ import {fetchComments} from "../redux/slices/commentsSlice";
 import CommentCard from "../components/CommentCard";
 import { ReviewId } from "../types/common";
 import {selectComments, selectCommentsStatus, selectUser} from "../redux/selectors"
+import {FormattedMessage} from "react-intl";
 
 interface ICommentsProp {
     reviewId: ReviewId;
@@ -24,7 +25,7 @@ const Comments: FC<ICommentsProp> = ({ reviewId }) => {
     return (
         <Box>
             <Typography sx={{ mb: "40px" }} variant={"h3"}>
-                Comments
+                <FormattedMessage id={'comments.title'} />
             </Typography>
             {user && <CommentCreator review={reviewId} author={user} />}
             {status === 'loaded' ? (
@@ -38,7 +39,9 @@ const Comments: FC<ICommentsProp> = ({ reviewId }) => {
                         />
                     ))
                 ) : (
-                    !user && <Typography variant="body1" sx={{mb:'40px'}}>Already no any comment.</Typography>
+                    !user && <Typography variant="body1" sx={{mb:'40px'}}>
+                        <FormattedMessage id={'comments.none'} />
+                    </Typography>
                 )
             ) : (
                 <Skeleton height={"200px"} />

@@ -25,7 +25,7 @@ const Header = () => {
     };
 
     return (
-            <AppBar position="sticky" sx={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+            <AppBar position="sticky" sx={{display:'flex', flexWrap:'wrap', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Link to={'/'} style={{textDecoration:'none'}}>
                     <Typography variant="h6" sx={{ml:'20px'}}>
                         WXZVRD

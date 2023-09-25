@@ -16,6 +16,7 @@ import {useDebounce} from "../utils/debounce";
 import CompositionService from "../services/compositionService";
 import {IComposition} from "../types/common";
 import {useNavigate, useParams} from "react-router-dom";
+import {FormattedMessage} from "react-intl";
 
 const categories = [
     { label: 'Books' },
@@ -165,7 +166,9 @@ function ReviewForm() {
                                     {({ getRootProps, getInputProps }) => (
                                         <Paper sx={{p:'40px', justifyContent:'center', alignItems:'center', border:'dashed 2px gray'}} {...getRootProps()} >
                                             <input {...getInputProps()} name="img" />
-                                            <Typography variant={"body2"}>Drag files, or click to select</Typography>
+                                            <Typography variant={"body2"}>
+                                                <FormattedMessage id={"reviewForm.dragFiles"}/>
+                                            </Typography>
                                         </Paper>
                                     )}
                                 </Dropzone>
@@ -173,7 +176,9 @@ function ReviewForm() {
                             : (
                                 <Box>
                                     <img style={{maxWidth:'1110px', width:'100%', borderRadius:"10px"}} src={imgUrl} alt="Image"/>
-                                    <Button sx={{mt:'10px'}} variant={"contained"} onClick={removeImage}>Delete</Button>
+                                    <Button sx={{mt:'10px'}} variant={"contained"} onClick={removeImage}>
+                                        <FormattedMessage id={"delete.btn"}/>
+                                    </Button>
                                 </Box>
                             )}
 
@@ -184,7 +189,7 @@ function ReviewForm() {
                             }}
                             sx={{m:'30px 0'}}
                             variant={"outlined"}
-                            label="Title"
+                            label={<FormattedMessage id={"reviewForm.title"}/>}
                             fullWidth />
 
                         <Box sx={{ display: 'flex', width: '70%', justifyContent: 'space-between' }}>
@@ -204,7 +209,7 @@ function ReviewForm() {
                                         {...params}
                                         {...register("category")}
                                         variant={"outlined"}
-                                        helperText={"*Choose category"}
+                                        helperText={<FormattedMessage id={"reviewForm.category"}/>}
                                         fullWidth />
                                 )}
                             />
@@ -236,7 +241,7 @@ function ReviewForm() {
                                     <TextField
                                         {...params}
                                         {...register("composition.title")}
-                                        helperText={"*Choose composition"}
+                                        helperText={<FormattedMessage id={"reviewForm.composition"}/>}
                                         variant="outlined"
                                         fullWidth />
                                 )}
@@ -260,7 +265,7 @@ function ReviewForm() {
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
-                                    helperText={"*Input tags"}
+                                    helperText={<FormattedMessage id={"reviewForm.tags"}/>}
                                     defaultValue={getValues("tags")}
                                     variant="outlined"
                                     fullWidth
@@ -278,7 +283,7 @@ function ReviewForm() {
                                     theme="snow"
                                     value={field.value}
                                     onChange={(value) => field.onChange(value)}
-                                    style={{height:'300px', marginBottom:'80px'}}
+                                    style={{height:'600px', marginBottom:'80px'}}
                                     modules={{
                                         toolbar: toolbarOptions
                                     }}
@@ -287,7 +292,7 @@ function ReviewForm() {
                         />
 
                         <Box>
-                            <Typography variant={"h6"}>Rate :</Typography>
+                            <Typography variant={"h6"}><FormattedMessage id={"reviewForm.rate"}/> :</Typography>
                             <Controller
                                 name="rating"
                                 control={control}
@@ -315,7 +320,7 @@ function ReviewForm() {
                             variant="contained"
                             color="primary"
                         >
-                            Submit
+                            <FormattedMessage id={"submit.btn"}/>
                         </Button>
                     </form>
                 )

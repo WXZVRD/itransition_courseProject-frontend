@@ -19,12 +19,16 @@
     "axios": "^1.5.0",
     "dropzone": "^6.0.0-beta.2",
     "highlight.js": "^11.8.0",
+    "i18next": "^23.5.1",
+    "i18next-browser-languagedetector": "^7.1.0",
+    "i18next-http-backend": "^2.2.2",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.46.1",
+    "react-intl": "^6.4.7",
     "react-markdown": "^8.0.7",
     "react-quill": "^2.0.0",
     "react-redux": "^8.1.2",
@@ -63,6 +67,7 @@
   "devDependencies": {
     "@types/js-cookie": "^3.0.4",
     "@types/react-syntax-highlighter": "^15.5.7",
+    "react-i18next": "^13.2.2",
     "rehype-raw": "^7.0.0"
   }
 }
